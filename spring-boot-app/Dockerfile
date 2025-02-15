@@ -9,5 +9,8 @@ WORKDIR /opt/app
 
 COPY ${artifact} app.jar
 
+# Change the default port to 8000
+ENV SERVER_PORT=8000
+
 # This should not be changed
 ENTRYPOINT ["java","-jar","app.jar"]
