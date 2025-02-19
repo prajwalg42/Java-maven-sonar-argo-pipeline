@@ -38,8 +38,8 @@ pipeline {
             }    
             steps {
                 sh 'cd spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
-                sh 'docker.withRegistry('',"Docker_token")' {
-                sh docker push ${DOCKER_IMAGE}    
+                docker.withRegistry('',"Docker_token")' {
+                sh 'docker push ${DOCKER_IMAGE}'    
                 }
             }
         }    
