@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout SCM'){
             steps{
                 sh 'echo passed'
-                git branch: 'master' url: 'https://github.com/prajwalg42/Java-maven-sonar-argo-pipeline.git'
+                git branch: 'master', url: 'https://github.com/prajwalg42/Java-maven-sonar-argo-pipeline.git'
             }
         }
         stage('Build and test'){
