@@ -19,27 +19,31 @@ pipeline {
                    '''             
             }
         }
-        stage('Sonar Analysis'){
+        stage ('Sonar Analysis') {
             environment {
                 SONAR_URL = 'localhost:9000'
             }
             steps{
-                withCredentials([string(credentialsId: 'SonarQube-Auth-token', variable: 'SONAR_AUTH_TOKEN')])
-                sh 'cd sprint-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}'
+                withCredentials([string(credentialsId: 'SonarQube-Auth-token', variable: 'SONAR_AUTH_TOKEN')]){
+                sh '''
+                    cd spring-boot-app 
+                    mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}
+                   ''' 
+                }
             }
         }
-        stage('Build and Push Docker Image'){
+        stage ('Build and Push Docker Image') {
             environment{
                 DOCKER_IMAGE="prajwalg42/ultimate-cicd:${BUILD_NUMBER}"                
             }    
-            steps{
+            steps {
                 sh 'cd spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
                 sh 'docker.withRegistry('',"Docker_token")' {
                 sh docker push ${DOCKER_IMAGE}    
                 }
             }
         }    
-        stage('Update Deployment file'){
+        stage ('Update Deployment file') {
             environment{
                 GIT_REPO_NAME = "Java-maven-sonar-argo-pipeline"
                 GIT_USER_NAME = "prajwalg42"
