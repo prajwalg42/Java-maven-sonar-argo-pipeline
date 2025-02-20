@@ -24,7 +24,7 @@ pipeline {
                 SONAR_URL = 'http://172.18.0.3:9000'
             }
             steps{
-                withCredentials([string(credentialsId: 'SonarQube-Auth-token', variable: 'SONAR_AUTH_TOKEN')]){
+                withCredentials([string(credentialsId: 'jenkins-sonar-pipeline-token', variable: 'SONAR_AUTH_TOKEN')]){
                 sh '''
                     cd spring-boot-app 
                     mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}
