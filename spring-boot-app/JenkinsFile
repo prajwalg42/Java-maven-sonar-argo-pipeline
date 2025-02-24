@@ -18,10 +18,10 @@ pipeline {
         }
         stage ('Sonar Analysis') {
             environment {
-                SONAR_URL = 'http://172.18.0.3:9000'
+                SONAR_URL = 'http://172.17.0.2:9000'
             }
             steps{
-                //sh 'curl -v http://172.18.0.3:9000'    
+                //sh 'curl -v http://172.17.0.2:9000'    
                 withCredentials([string(credentialsId: 'jenkins-sonar-pipeline-token', variable: 'SONAR_AUTH_TOKEN')]){
                 sh '''
                     cd spring-boot-app 
