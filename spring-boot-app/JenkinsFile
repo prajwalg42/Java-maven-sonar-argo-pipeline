@@ -54,7 +54,7 @@ pipeline {
                         git config user.email "prajwalgaikwad42@gmail.com"
                         git config user.name "prajwalg42"  
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml              
-                        git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml            
+                        git add Java-maven-sonar-argo-pipeline/spring-boot-app-manifests/deployment.yml            
                         git commit -m "Update deployment to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         '''
