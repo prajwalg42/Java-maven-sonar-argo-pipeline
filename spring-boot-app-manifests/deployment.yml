@@ -18,4 +18,4 @@ spec:
       - name: spring-boot-app
         image: prajwalg42/ultimate-cicd:38
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
